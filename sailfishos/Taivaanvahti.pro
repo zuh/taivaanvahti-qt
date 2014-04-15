@@ -14,6 +14,10 @@ SOURCES += \
     src/Taivaanvahti.cpp \
     ../common/src/lomakemanager.cpp
 
+SCRIPTS = \
+    ../common/qml/taivas.js \
+    qml/lomake.js
+
 OTHER_FILES += qml/harbour-taivaanvahti.qml \
     qml/cover/CoverPage.qml \
     rpm/harbour-taivaanvahti.spec \
@@ -25,9 +29,7 @@ OTHER_FILES += qml/harbour-taivaanvahti.qml \
     qml/pages/Havainnot.qml \
     qml/pages/Haku.qml \
     qml/pages/Raportoi.qml \
-    ../common/qml/taivas.js \
     qml/pages/Lomake.qml \
-    qml/lomake.js \
     qml/pages/components/LomakeItem.qml \
     qml/pages/components/TekstiKentta.qml \
     qml/pages/components/NumeroKentta.qml \
@@ -39,3 +41,7 @@ OTHER_FILES += qml/harbour-taivaanvahti.qml \
 HEADERS += \
     ../common/src/lomakemanager.h
 
+scripts.files += $${SCRIPTS}
+scripts.path += /usr/share/$${TARGET}/qml/
+
+INSTALLS += scripts
