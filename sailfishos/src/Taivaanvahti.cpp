@@ -33,7 +33,7 @@
 #endif
 
 #include <sailfishapp.h>
-#include "lomakemanager.h"
+#include "../../common/src/lomakemanager.h"
 
 int main(int argc, char *argv[])
 {
