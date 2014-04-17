@@ -19,11 +19,25 @@ LomakeItem {
                 MenuItem {
                     property string valueId: modelData.value_id
                     text: modelData.value_name
+                    Component.onCompleted: {
+                        console.debug("id: " + valueId + " | value: " + text)
+                    }
                 }
             }
         }
         onCurrentIndexChanged: {
             mainItem.value = box.currentItem.valueId
         }
+    }
+
+    function validate()
+    {
+        console.debug("starting to validate select field")
+        if (mandatory && value === "- valitse -") {
+            console.debug("validation fails")
+            return false;
+        }
+        console.debug("validation passes")
+        return true;
     }
 }

@@ -8,8 +8,14 @@ LomakeItem {
     value: numField.text
     Column {
         width: parent.width
-        Label {
-            text: title
+        Item {
+            width: parent.width
+            height: numLabel.height + 2 * Theme.paddingLarge
+            Label {
+                id: numLabel
+                text: title
+
+            }
         }
         TextField {
             id: numField
@@ -28,5 +34,16 @@ LomakeItem {
             text += "Vapaaehtoinen. ";
         }
         return text;
+    }
+
+    function validate()
+    {
+        console.debug("starting to validate numeric field")
+        if (mandatory && numField.text.length <= 0) {
+            console.debug("validation fails")
+            return false;
+        }
+        console.debug("validation passes")
+        return true;
     }
 }

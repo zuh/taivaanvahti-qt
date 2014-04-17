@@ -36,24 +36,43 @@ Page {
             Column {
                 id: col
                 width: parent.width
+                spacing: Theme.paddingLarge
             }
             Button {
                 id: sendButton
                 width: parent.width
                 text: "Lähetä"
                 onClicked: {
+                    var validates = true;
                     for (var i in col.children)
                     {
-                        lomakemanager.lisaaPari(col.children[i].fieldId, col.children[i].value)
+                        if (!col.children[i].validate())
+                        {
+                            validates = false;
+                        }
                     }
-                    lahetysLabel.text = "Lomaketta lähetetään.."
-                    lomakemanager.asetaKategoria(categoryName)
-                    lomakemanager.lahetaLomake();
+                    if (validates)
+                    {
+                        for (var i in col.children)
+                        {
+                            lomakemanager.lisaaPari(col.children[i].fieldId, col.children[i].value)
+                        }
+
+                        lahetysLabel.text = "Lomaketta lähetetään.."
+                        lomakemanager.asetaKategoria(categoryName)
+                        lomakemanager.lahetaLomake();
+                    }
+                    else
+                    {
+                        lahetysLabel.text = "virheellisten kenttien tiedot korjattava ennen lähetystä";
+                    }
                 }
             }
             Label {
                 id: lahetysLabel
                 text: ""
+                width: parent.width
+                wrapMode: Text.WordWrap
             }
         }
     }

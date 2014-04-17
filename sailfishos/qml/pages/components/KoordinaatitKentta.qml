@@ -10,11 +10,19 @@ LomakeItem {
     Component.onCompleted: {
         console.debug("Koordinaatitkentta: " + title + " | " + mandatory + " | " + fieldId);
     }
-    Label {
-        id: coord
+    Item {
         width: parent.width
-        anchors.verticalCenter: parent.verticalCenter
-        text: title + ": " + lat + ", " + lon
+        height: coord.height + 2 * Theme.paddingLarge
+        Label {
+            id: coord
+            width: parent.width - 2 * Theme.paddingLarge
+            anchors.left: parent.left
+            anchors.leftMargin: Theme.paddingLarge
+            anchors.top: parent.top
+            anchors.topMargin: Theme.paddingLarge
+            text: title + ": " + lat + ", " + lon
+            elide: Text.ElideRight
+        }
     }
     PositionSource {
         id: positionSource
@@ -23,5 +31,16 @@ LomakeItem {
             lat = position.coordinate.latitude
             lon = position.coordinate.longitude
         }
+    }
+
+    function validate()
+    {
+        console.debug("starting to validate coordinate field")
+        if (value === ", ") {
+            console.debug("validation fails")
+            return false;
+        }
+        console.debug("validation passes")
+        return true;
     }
 }
