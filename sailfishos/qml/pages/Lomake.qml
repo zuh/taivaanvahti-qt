@@ -53,14 +53,14 @@ Page {
                     }
                     if (validates)
                     {
-                        for (var i in col.children)
+                        for (var j in col.children)
                         {
-                            lomakemanager.lisaaPari(col.children[i].fieldId, col.children[i].value)
+                            lomakemanager.lisaaPari(col.children[j].fieldId, col.children[j].value)
                         }
 
                         lahetysLabel.text = "Lomaketta lähetetään.."
                         lomakemanager.asetaKategoria(categoryName)
-                        lomakemanager.lahetaLomake();
+                        //lomakemanager.lahetaLomake();
                     }
                     else
                     {

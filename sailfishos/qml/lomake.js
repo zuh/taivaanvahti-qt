@@ -15,8 +15,8 @@ function luoLomake(lomakeTeksti, vainPakolliset) {
         luoKentta();
     }
 
-    for (var i in specifics) {
-        item = specifics[i];
+    for (var j in specifics) {
+        item = specifics[j];
         luoKentta();
     }
 
@@ -66,6 +66,28 @@ function luoKentta()
         {
             luoPerusObjekti()
         }
+    } else if (item.field_type === "checkbox") {
+        if (item.values !== undefined)
+        {
+            component = Qt.createComponent("pages/components/MonivalintaKentta.qml");
+            console.debug("luodaan monivalintadialog")
+            if (odotaLatausta())
+            {
+                luoMonivalintaObjekti()
+            }
+        }
+        else
+        {
+            component = Qt.createComponent("pages/components/CheckboxKentta.qml");
+            console.debug("luodaan checkbox kenttä")
+            if (odotaLatausta())
+            {
+                luoPerusObjekti()
+            }
+        }
+    } else {
+        console.debug("some other object received")
+        console.debug(item.field_type)
     }
 }
 

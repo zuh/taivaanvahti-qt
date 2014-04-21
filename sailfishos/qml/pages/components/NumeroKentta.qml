@@ -14,7 +14,9 @@ LomakeItem {
             Label {
                 id: numLabel
                 text: title
-
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingLarge
+                anchors.verticalCenter: parent.verticalCenter
             }
         }
         TextField {

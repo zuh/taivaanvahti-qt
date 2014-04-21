@@ -61,9 +61,20 @@ void LomakeManager::lahetaLomake()
 
 void LomakeManager::lomakeVastaanotettu()
 {
+    qDebug() << "lomake vastaanotettu";
     QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
     QString replyString = QString::fromUtf8(reply->readAll());
-    qDebug() << replyString;
+    QTextStream ss(&replyString);
+    bool notEnd = true;
+    while (notEnd)
+    {
+        QString string = ss.readLine();
+        if (string.isNull()) {
+            notEnd = false;
+        } else {
+            qDebug() << string;
+        }
+    }
     emit lomakeSaatavilla(replyString);
 }
 

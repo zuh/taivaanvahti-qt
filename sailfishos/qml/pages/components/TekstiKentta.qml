@@ -62,7 +62,7 @@ LomakeItem {
 
     function validate()
     {
-        console.debug("starting to validate text fieldd")
+        console.debug("starting to validate text field")
         if (!mandatory && (maxLength > 0) && charsLeft < 0) {
             console.debug("validation fails")
             return false;

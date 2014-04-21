@@ -36,7 +36,10 @@ OTHER_FILES += qml/harbour-taivaanvahti.qml \
     qml/pages/components/SelectKentta.qml \
     qml/pages/components/AikaKentta.qml \
     qml/pages/components/PaivamaaraKentta.qml \
-    qml/pages/components/KoordinaatitKentta.qml
+    qml/pages/components/KoordinaatitKentta.qml \
+    qml/pages/components/MonivalintaKentta.qml \
+    qml/pages/components/MonivalintaDialog.qml \
+    qml/pages/components/CheckboxKentta.qml
 
 HEADERS += \
     ../common/src/lomakemanager.h
