@@ -17,12 +17,12 @@ LomakeItem {
         value: ""
 
         onClicked: {
-            var dialog = pageStack.push("MonivalintaDialog.qml", { "values": values, "mandatory": mandatory })
+            var dialog = pageStack.push("MonivalintaDialog.qml", { "values": values, "mandatory": mandatory, "value": itemi.value })
 
             dialog.accepted.connect(function() {
                 itemi.value = dialog.value
                 acceptable = dialog.acceptable
-                button.value = dialog.valueNames
+                button.value = dialog.getValueNames()
             })
         }
     }

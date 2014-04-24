@@ -6,7 +6,8 @@ Dialog {
     property bool acceptable: false
     property string value: ""
     property bool mandatory
-    property string valueNames
+    property var selected: ({})
+    property bool dataInitialized: false
 
     DialogHeader {
         id: header
@@ -40,7 +41,14 @@ Dialog {
                         property string valueId: modelData.value_id
                         text: modelData.value_name
                         Component.onCompleted: {
-                            console.debug("id: " + valueId + " | value: " + text)
+                            dataInitialized = false;
+                            selected = value.split(",");
+                            if (selected.indexOf(valueId) != -1)
+                            {
+                                checked = true;
+                            }
+                            console.debug("id: " + valueId + " | value: " + text + " | selected: " + checked)
+                            dataInitialized = true;
                         }
                         onCheckedChanged: {
                             updateValue();
@@ -73,36 +81,50 @@ Dialog {
 
     function updateValue()
     {
+        if (!dataInitialized)
+        {
+            return;
+        }
         value = "";
-        valueNames = "";
         var first = true;
         for (var i in itams.children)
         {
-            console.debug("itams child")
             if (itams.children[i].checked)
             {
-                console.debug("item checked")
                 if (first)
                 {
-                    console.debug("first, not appending comma")
                     first = false;
                 }
                 else
                 {
-                    console.debug("not first, appending comma")
                     value += ",";
-                    valueNames += ", "
                 }
-                console.debug("appending with value " + itams.children[i].valueId)
                 value += itams.children[i].valueId;
-                valueNames += itams.children[i].text;
-            }
-            else
-            {
-                console.debug("child " + itams.children[i].valueId + " not checked")
             }
         }
         console.debug("updated value to; " + value);
+    }
+
+    function getValueNames()
+    {
+        var valueNames = "";
+        var first = true;
+        for (var i in itams.children)
+        {
+            if (itams.children[i].checked)
+            {
+                if (first)
+                {
+                    first = false;
+                }
+                else
+                {
+                    valueNames += ", "
+                }
+                valueNames += itams.children[i].text;
+            }
+        }
         console.debug("value names: " + valueNames)
+        return valueNames;
     }
 }
